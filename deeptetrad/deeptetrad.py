@@ -7376,7 +7376,7 @@ def run_deeptetrad():
                         metavar="/path/to/physical_loc.txt",
                         help='Directory of the physical locations')
     parser.add_argument('--path', required=True,
-                        metavar="path to fluorescence images",
+                        metavar="path to fluorescent images",
                         help='Images to run DeepTetrad')
     
     args = parser.parse_args()
