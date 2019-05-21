@@ -1,0 +1,7 @@
+I1bc	GRC
+I1fg	GCR
+I2ab	CGR
+I2fg	RGC
+I3bc	CGR
+I5ab	RGC
+CEN3	RG
