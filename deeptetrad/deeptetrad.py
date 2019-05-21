@@ -7366,9 +7366,8 @@ def load_physical_locations(a_path):
             tokens = line.split('\t')
             result_dict[tokens[0]] = tokens[1] 
     return result_dict
-    
-if __name__ == "__main__":
-    
+
+def run_deeptetrad():
     import argparse
     parser = argparse.ArgumentParser(
         description='Run DeepTetrad')
@@ -7389,4 +7388,7 @@ if __name__ == "__main__":
     visualize_dict = {'merge': False, 'count': False}
     debug_set = set()
     run_tetrad_count_all_process(root_path, physical_channels, purge_dict, capture_dict, visualize_dict, debug_set, desired_min_area_ratio)
+    
+if __name__ == "__main__":
+    run_deeptetrad()
     
