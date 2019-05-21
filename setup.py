@@ -46,6 +46,9 @@ setup(
     install_requires=install_reqs,
     include_package_data=True,
     python_requires='>=3.4',
+    entry_points = {
+        'console_scripts': ['deeptetrad=deeptetrad.command_line:main'],
+    },
     long_description=long_description,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
