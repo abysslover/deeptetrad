@@ -47,7 +47,7 @@ setup(
     include_package_data=True,
     python_requires='>=3.4',
     entry_points = {
-        'console_scripts': ['deeptetrad=deeptetrad.command_line:main'],
+        'console_scripts': ['deeptetrad=deeptetrad.deeptetrad:main'],
     },
     long_description=long_description,
     classifiers=[

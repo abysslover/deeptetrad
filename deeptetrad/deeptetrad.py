@@ -7367,12 +7367,12 @@ def load_physical_locations(a_path):
             result_dict[tokens[0]] = tokens[1] 
     return result_dict
 
-def run_deeptetrad():
+def main():
     import argparse
     parser = argparse.ArgumentParser(
         description='Run DeepTetrad')
     parser.add_argument('--physical_loc', required=False,
-                        default='physical_loc.txt',
+                        default=None,
                         metavar="/path/to/physical_loc.txt",
                         help='Directory of the physical locations')
     parser.add_argument('--path', required=True,
@@ -7381,7 +7381,10 @@ def run_deeptetrad():
     
     args = parser.parse_args()
     root_path = args.path
-    physical_channels = load_physical_locations(args.physical_loc)
+    if None is args.physical_loc:
+        physical_channels = {'I1bc': 'GRC', 'I1fg': 'GCR', 'I2ab': 'CGR', 'I2fg': 'RGC', 'I3bc': 'CGR', 'I5ab': 'RGC', 'CEN3': 'RG'}
+    else:
+        physical_channels = load_physical_locations(args.physical_loc)
     desired_min_area_ratio = 4
     purge_dict = {'align': False, 'pollen': False, 'tetrad': False, 'merge': False, 'count': False}
     capture_dict = {'merge': False, 'count': False}
@@ -7390,5 +7393,5 @@ def run_deeptetrad():
     run_tetrad_count_all_process(root_path, physical_channels, purge_dict, capture_dict, visualize_dict, debug_set, desired_min_area_ratio)
     
 if __name__ == "__main__":
-    run_deeptetrad()
+    main()
     
