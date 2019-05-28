@@ -1,1 +1,1 @@
-Mask_RCNN @ https://github.com/matterport/Mask_RCNN/archive/master.zip
+git+git://github.com/matterport/Mask_RCNN.git#egg=Mask_RCNN
