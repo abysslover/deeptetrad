@@ -34,6 +34,7 @@ except Exception:
     logging.warning('Fail load requirements file, so using default ones.')
     install_reqs = []
 
+print('[main] req: {}'.format(install_reqs))
 setup(
     name='deeptetrad',
     version='1.0',
