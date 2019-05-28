@@ -7,10 +7,9 @@ The build/compilations setup
 import pip
 import logging
 import pkg_resources
-import os
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
     from distutils.core import setup
 
@@ -34,21 +33,22 @@ except Exception:
     logging.warning('Fail load requirements file, so using default ones.')
     install_reqs = []
 
-print('[main] req: {}'.format(install_reqs))
 setup(
     name='deeptetrad',
-    version='1.0',
+    version='1.0.0.10',
     url='https://github.com/abysslover/deeptetrad',
     author='Eun-Cheon Lim',
     author_email='abysslover@gmail.com',
     license='GPL3.0',
-    description='DeepTetrad: deeplearning model for pollen-tetrad analysis',
-    packages=["deeptetrad"],
+    description='DeepTetrad: a deep learning model for fluorescent pollen-tetrad image analysis',
+    package_dir={'': '.', 'deeptetrad': './src/deeptetrad', 'mrcnn': './src/mrcnn', 'imgaug': './src/imgaug'},
+    packages=find_packages(where="./src"),
+    package_data={'deeptetrad': ['src/deeptetrad/pollen/*/*', 'src/deeptetrad/tetrad/*/*'], 'imgaug': ['src/imgaug/*.ttf', 'src/imgaug/*.json', 'src/imgaug/*.png', 'src/imgaug/*.jpg']},
     install_requires=install_reqs,
     include_package_data=True,
     python_requires='>=3.4',
     entry_points = {
-        'console_scripts': ['deeptetrad=deeptetrad.deeptetrad:main'],
+        'console_scripts': ['deeptetrad=deeptetrad.entry:main'],
     },
     long_description=long_description,
     classifiers=[
@@ -64,7 +64,7 @@ setup(
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering :: Image Recognition",
         "Topic :: Scientific/Engineering :: Visualization",
-        "Topic :: Scientific/Engineering :: Image Segmentation",
+#         "Topic :: Scientific/Engineering :: Image Segmentation",
         "Programming Language :: Python :: 3",
     ],
     keywords="tetrad crossover interference tensorflow keras",
