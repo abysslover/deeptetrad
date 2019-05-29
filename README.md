@@ -43,10 +43,10 @@ I5ab	RGC
 ```
 
 3. Examples
-    - A folder structure for testing
-<p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
-    - Fluorescent images for testing
-<p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
+     - A folder structure for testing
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
+     - Fluorescent images for testing
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
 
 ### Install DeepTetrad
 1. Install Anaconda
@@ -59,4 +59,4 @@ I5ab	RGC
 ```
 	deeptetrad --physical\_loc=T_DNA.txt --path=./test
 ```
-<p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
