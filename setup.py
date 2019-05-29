@@ -35,7 +35,7 @@ except Exception:
 
 setup(
     name='deeptetrad',
-    version='1.0.0.10',
+    version='1.0.0.11',
     url='https://github.com/abysslover/deeptetrad',
     author='Eun-Cheon Lim',
     author_email='abysslover@gmail.com',
