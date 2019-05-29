@@ -58,6 +58,6 @@ I5ab	RGC
 ```
 3. Run DeepTetrad
 ```
-	deeptetrad --physical\_loc=T_DNA.txt --path=./test
+	deeptetrad --physical_loc=T_DNA.txt --path=./test
 ```
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
