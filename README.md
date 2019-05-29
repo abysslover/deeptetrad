@@ -31,7 +31,7 @@ A step-by-step tutorial is provided in the following sections.
 
 2. Prepare a T-DNA map file
     - The file is a plain text file in which FTL names with T-DNA color orders are listed.
-    - An example (T-DNA.txt) is shown below:
+    - An example of "T-DNA.txt" is shown below:
     
 ```
 I1bc	GRC
@@ -42,8 +42,8 @@ I3bc	CGR
 I5ab	RGC
 ```
 
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
+<p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
+<p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
 
 
 ### Install DeepTetrad
@@ -57,4 +57,4 @@ I5ab	RGC
 ```
 	deeptetrad --physical\_loc=T_DNA.txt --path=./test
 ```
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
+<p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
