@@ -42,9 +42,11 @@ I3bc	CGR
 I5ab	RGC
 ```
 
+3. Examples
+    - A folder structure for testing
 <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
+    - Fluorescent images for testing
 <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
-
 
 ### Install DeepTetrad
 1. Install Anaconda
