@@ -11,13 +11,16 @@ A step-by-step tutorial is provided in the following sections.
 2. The resolution of a fluorescent image must be **(2560x1920)**.
 3. The **SUFFIX** of filenames is **VERY IMPORTANT** to be recognized by DeepTetrad. The conventions are listed below:
 
-|  Filename        |  description  |
+<p align="center">
+
+|  Filename        |  Description  |
 |------------ | -------------
 |  I3bc_(1)**-1**.jpg      |  a **bright-field** image (first)  |
 |  I3bc_(1)**-2**.jpg      |  a fluorescent image of **RED** light wave (second)  |
 |  I3bc_(1)**-3**.jpg |  a fluorescent image of **GREEN** light wave (third)  |
 |  I3bc_(1)**-4**.jpg |  a fluorescent image of **BLUE** light wave (fourth)  |   
 
+</p>
 <p align="center"><img width="128" height="128" src="https://github.com/abysslover/deeptetrad/raw/master/assets/I3bc_(1)-1.jpg"><img width="128" height="128" src="https://github.com/abysslover/deeptetrad/raw/master/assets/I3bc_(1)-2.jpg"><img width="128" height="128" src="https://github.com/abysslover/deeptetrad/raw/master/assets/I3bc_(1)-3.jpg"><img width="128" height="128" src="https://github.com/abysslover/deeptetrad/raw/master/assets/I3bc_(1)-4.jpg"></p>
 
 ### Prepare folder structures
@@ -37,15 +40,19 @@ I2fg	RGC
 I3bc	CGR
 I5ab	RGC
 ```
+    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
+    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
+
 
 ### Install DeepTetrad
 1. Install Anaconda
    - Download an Anaconda distribution: [Link](https://www.anaconda.com/distribution/)
 2. Install DeepTetrad
 ```
-   conda install -c abysslover deeptetrad
+	conda install -c abysslover deeptetrad
 ```
 3. Run DeepTetrad
 ```
-deeptetrad --physical\_loc=T_DNA.txt --path=./test
+	deeptetrad --physical\_loc=T_DNA.txt --path=./test
 ```
+    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
