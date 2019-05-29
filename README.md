@@ -27,7 +27,8 @@ A step-by-step tutorial is provided in the following sections.
 1. Put fluorescent images into folders.
     - The parent folder name determines how DeepTetrad recognizes the name of samples. For instance, the parent folder name of I3bc (1) represents the sample name of fluorescent images.
     - The folder name will be matched against the names in the physical T-DNA locations when determining Tetrad types. For example, "I3bc" will be matched with "Cyan-Yellow-Red", which is the order of the protein colors of the I3bc Fluorescent Tagged Transgenic Line(FTL).
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/folder_structure.jpg"></p>
+
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/folder_structure.jpg"></p>
 
 2. Prepare a T-DNA map file
     - The file is a plain text file in which FTL names with T-DNA color orders are listed.
