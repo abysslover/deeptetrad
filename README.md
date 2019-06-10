@@ -1,6 +1,6 @@
 # DeepTetrad Package
 
-A deep learning model for high-throughput fluorescent image analysis of pollen tetrads
+DeepTetrad: high-throughput analysis of meiotic tetrads by deep learning
 
 ## Getting Started
 A step-by-step tutorial is provided in the following sections.
