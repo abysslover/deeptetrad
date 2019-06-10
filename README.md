@@ -5,6 +5,9 @@ DeepTetrad: high-throughput analysis of meiotic tetrads by deep learning
 ## Getting Started
 A step-by-step tutorial is provided in the following sections.
 
+### Prerequisites
+You should install CUDA-enabled GPU cards with at least 12GB GPU memory manufactured by nVidia, e.g., Titan XP.
+
 ### Prepare fluorescent images
 
 1. Take photos of pollen tetrads by using microscopy.
