@@ -30,11 +30,13 @@ You should install CUDA-enabled GPU cards with at least 12GB GPU memory manufact
 1. Put fluorescent images into folders.
     - The parent folder name determines how DeepTetrad recognizes the name of samples. For instance, the parent folder name of I3bc (1) represents the sample name of fluorescent images.
     - The folder name will be matched against the names in the physical T-DNA locations when determining Tetrad types. For example, "I3bc" will be matched with "Cyan-Yellow-Red", which is the order of the protein colors of the I3bc Fluorescent Tagged Transgenic Line(FTL).
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/folder_structure.jpg"></p>
+
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/folder_structure.jpg"></p>
 
 2. Prepare a T-DNA map file
     - The file is a plain text file in which FTL names with T-DNA color orders are listed.
-    - An example (T-DNA.txt) is shown below:
+    - An example of "T-DNA.txt" is shown below:
+    
 ```
 I1bc	GRC
 I1fg	GCR
@@ -43,9 +45,12 @@ I2fg	RGC
 I3bc	CGR
 I5ab	RGC
 ```
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
 
+3. Examples
+     - A folder structure for testing
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_00.jpg"></p>
+     - Fluorescent images for testing
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/test_folder_files_01.jpg"></p>
 
 ### Install DeepTetrad
 1. Install Anaconda
@@ -56,6 +61,6 @@ I5ab	RGC
 ```
 3. Run DeepTetrad
 ```
-	deeptetrad --physical\_loc=T_DNA.txt --path=./test
+	deeptetrad --physical_loc=T_DNA.txt --path=./test
 ```
-    - <p><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
+<p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
