@@ -61,11 +61,12 @@ I5ab	RGC
 ```
 3. Install DeepTetrad
 ```
+	conda activate pac
 	conda install -c abysslover deeptetrad
 ```
 4. Run DeepTetrad
 ```
-	conda activate pac
 	deeptetrad --physical_loc=T_DNA.txt --path=./test
 ```
+**NOTE**: you must activate the conda enviroment before running deeptetrad if you opened a **new console**.
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
