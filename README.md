@@ -70,3 +70,6 @@ I5ab	RGC
 ```
 **NOTE**: you must activate the conda enviroment before running deeptetrad if you opened a **new console**.
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
+
+### Contact
+Please contact abysslover@gmail.com and kyuha@postech.ac.kr if you have any questions about DeepTetrad.
