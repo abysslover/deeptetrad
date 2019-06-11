@@ -55,12 +55,17 @@ I5ab	RGC
 ### Install DeepTetrad
 1. Install Anaconda
    - Download an Anaconda distribution: [Link](https://www.anaconda.com/distribution/)
-2. Install DeepTetrad
+2. Create a Conda environment
+```
+	conda create -n pac
+```
+3. Install DeepTetrad
 ```
 	conda install -c abysslover deeptetrad
 ```
-3. Run DeepTetrad
+4. Run DeepTetrad
 ```
+	conda activate pac
 	deeptetrad --physical_loc=T_DNA.txt --path=./test
 ```
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
