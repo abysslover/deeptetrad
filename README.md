@@ -22,7 +22,6 @@ You should install CUDA-enabled GPU cards with at least 12GB GPU memory manufact
 ### Prepare fluorescent images
 
 1. Take photos of pollen tetrads by using microscopy.
-
 2. The resolution of a fluorescent image must be **(2560x1920)**.
 3. The **SUFFIX** of filenames is **VERY IMPORTANT** to be recognized by DeepTetrad. The conventions are listed below:
 
