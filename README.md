@@ -1,7 +1,7 @@
 # DeepTetrad Package
 DeepTetrad: high-throughput analysis of meiotic tetrads by deep learning
 
-### Acknowledgement
+### Contributions
 - The project was initiated by Prof. Choi and the code is written by Dr. Lim (abysslover) at Pohang Science and Technology (POSTECH) Plant Genomic Recombination ([PGR](https://hae02032008.wixsite.com/kyuha)) Laboratory.
     
 - This research was conducted in collaborations with the following people:
