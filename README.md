@@ -10,7 +10,8 @@ Eun-Cheon Lim<sup>1</sup>, Jaeil Kim<sup>1</sup>, Jihye Park<sup>1</sup>, Eun-Ju
 
 1. Department of Life Sciences, Pohang University of Science and Technology, Pohang, Gyeongbuk, Republic of Korea
 2. Department of Plant Sciences, University of Cambridge, Cambridge CB2 3EA, UK
-3. Department of Biology and the Integrative Program for Biological and Genome Sciences, University of North Carolina at Chapel Hill, Chapel Hill, North Carolina, USA 
+3. Department of Biology and the Integrative Program for Biological and Genome Sciences, University of North Carolina at Chapel Hill, Chapel Hill, North Carolina, USA
+
 
 ## Getting Started
 A step-by-step tutorial is provided in the following sections.
@@ -21,6 +22,7 @@ You should install CUDA-enabled GPU cards with at least 12GB GPU memory manufact
 ### Prepare fluorescent images
 
 1. Take photos of pollen tetrads by using microscopy.
+
 2. The resolution of a fluorescent image must be **(2560x1920)**.
 3. The **SUFFIX** of filenames is **VERY IMPORTANT** to be recognized by DeepTetrad. The conventions are listed below:
 
