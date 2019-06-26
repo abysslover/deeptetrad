@@ -2,7 +2,7 @@
 DeepTetrad: high-throughput analysis of meiotic tetrads by deep learning
 
 ### Contributions
-- The project was initiated by Prof. Choi and the code is written by Dr. Lim (abysslover) at Pohang Science and Technology (POSTECH) Plant Genomic Recombination ([PGR](https://hae02032008.wixsite.com/kyuha)) Laboratory.
+- The project was initiated by Prof. Choi and the code is written by Dr. Lim (abysslover) at Pohang University of Science and Technology (POSTECH) Plant Genomic Recombination ([PGR](https://hae02032008.wixsite.com/kyuha)) Laboratory.
     
 - This research was conducted in collaborations with the following people:
 Eun-Cheon Lim<sup>1</sup>, Jaeil Kim<sup>1</sup>, Jihye Park<sup>1</sup>, Eun-Jung Kim<sup>1</sup>, Yeong Mi Park<sup>1</sup>, Juhyun Kim<sup>1</sup>, Hyun Seob Cho<sup>1</sup>, Ian R Henderson<sup>2</sup>, Gregory P Copenhaver<sup>3</sup>, Ildoo Hwang<sup>1</sup> and Kyuha Choi<sup>1</sup>.
@@ -12,7 +12,7 @@ Eun-Cheon Lim<sup>1</sup>, Jaeil Kim<sup>1</sup>, Jihye Park<sup>1</sup>, Eun-Ju
 2. Department of Plant Sciences, University of Cambridge, Cambridge CB2 3EA, UK
 3. Department of Biology and the Integrative Program for Biological and Genome Sciences, University of North Carolina at Chapel Hill, Chapel Hill, North Carolina, USA
 
-
+- The manuscript is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/677351v1.full)
 
 ## Getting Started
 A step-by-step tutorial is provided in the following sections.
