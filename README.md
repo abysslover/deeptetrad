@@ -23,7 +23,7 @@ You should install CUDA-enabled GPU cards with at least 12GB GPU memory manufact
 ### Prepare fluorescent images
 
 1. Take photos of pollen tetrads by using microscopy.
-2. The resolution of a fluorescent image must be **(2560x1920)**.
+2. The resolution of a fluorescent image must be smaller than **(2560x1920)**.
 3. The **SUFFIX** of filenames is **VERY IMPORTANT** to be recognized by DeepTetrad. The conventions are listed below:
 
 <p align="center">
@@ -40,8 +40,8 @@ You should install CUDA-enabled GPU cards with at least 12GB GPU memory manufact
 
 ### Prepare folder structures
 1. Put fluorescent images into folders.
-    - The parent folder name determines how DeepTetrad recognizes the name of samples. For instance, the parent folder name of I3bc (1) represents the sample name of fluorescent images.
-    - The grand-parent folder name will be matched against the names in the physical T-DNA locations when determining Tetrad types. For example, "I3bc" in the figure, will be matched with "Cyan-Yellow-Red", which is the order of the protein colors of the I3bc Fluorescent Tagged Transgenic Line(FTL).
+    - The **parent folder name** determines how DeepTetrad recognizes the name of samples. For instance, the parent folder name of I3bc (1) represents the sample name of fluorescent images.
+    - The **grand-parent folder** name will be matched against the names in the physical T-DNA locations when determining Tetrad types. For example, "I3bc" in the figure, will be matched with "Cyan-Yellow-Red", which is the order of the protein colors of the I3bc Fluorescent Tagged Transgenic Line(FTL).
 
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/folder_structure.jpg"></p>
 
@@ -81,7 +81,15 @@ I5ab	RGC
 	conda activate pac
 	deeptetrad --physical_loc=T_DNA.txt --path=./test
 ```
-**NOTE**: you must activate the conda enviroment before running deeptetrad if you opened a **new console**.
+5. Update DeepTetrad
+```
+	conda activate pac
+	conda remove deeptetrad
+	conda install -c abysslover deeptetrad
+```
+**NOTE**:
+1. You must activate the conda enviroment before running deeptetrad if you opened a **new console**.
+2. The model weights are not updated by *conda update* command, hence you should follow the manual update method as mentioned above.
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
 
 ### Contact
