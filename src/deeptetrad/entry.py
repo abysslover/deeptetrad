@@ -21,9 +21,9 @@ from keras.backend.tensorflow_backend import get_session, clear_session,\
 from scipy.spatial.ckdtree import cKDTree
 from scipy.spatial.kdtree import KDTree
 
-from utils import *
-from utils.file_utils import *
-from utils.image_utils import *
+from deeptetrad.utils import *
+from deeptetrad.utils.file_utils import *
+from deeptetrad.utils.image_utils import *
 from joblib import Parallel, delayed
 import matplotlib
 matplotlib.use('Agg')
