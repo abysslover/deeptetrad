@@ -1,0 +1,13 @@
+## [1.0.1.0] - 2019-09-20
+### Changed
+- The backbone of the pollen model is changed to resnet101
+- The pollen model is re-trained in order to fully cover the image containing more dense number of tetrads
+
+## removed
+- As refactoring is done, much of unnecessary functions were deleted.
+
+## [1.0.0.13] - 2019-05-28
+### The initial release version for publication
+
+## [1.0.0.0] - 2019-03-01
+### The initial private version
