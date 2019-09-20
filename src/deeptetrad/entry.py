@@ -3943,7 +3943,7 @@ def main():
     else:
         physical_channels = load_physical_locations(args.physical_loc)
     desired_min_area_ratio = 4
-    purge_dict = {'align': False, 'pollen': True, 'tetrad': True, 'merge': True, 'count': True}
+    purge_dict = {'align': False, 'pollen': False, 'tetrad': False, 'merge': False, 'count': False}
     capture_dict = {'merge': False, 'count': False}
     visualize_dict = {'merge': False, 'count': False}
     debug_set = set()
