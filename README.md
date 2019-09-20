@@ -5,7 +5,7 @@ DeepTetrad: high-throughput analysis of meiotic tetrads by deep learning
 - The project was initiated by Prof. Choi and the code is written by Dr. Lim (abysslover) at Pohang University of Science and Technology (POSTECH) Plant Genomic Recombination ([PGR](https://hae02032008.wixsite.com/kyuha)) Laboratory.
     
 - This research was conducted in collaborations with the following people:
-Eun-Cheon Lim<sup>1</sup>, Jaeil Kim<sup>1</sup>, Jihye Park<sup>1</sup>, Eun-Jung Kim<sup>1</sup>, Juhyun Kim<sup>1</sup>, Hyun Seob Cho<sup>1</sup>, Dohwan Byun<sup>1</sup>, Ian R Henderson<sup>2</sup>, Gregory P Copenhaver<sup>3</sup>, Ildoo Hwang<sup>1</sup> and Kyuha Choi<sup>1</sup>.
+Eun-Cheon Lim<sup>1</sup>, Jaeil Kim<sup>1</sup>, Jihye Park<sup>1</sup>, Eun-Jung Kim<sup>1</sup>, Juhyun Kim<sup>1</sup>, Yeong Mi Park<sup>1</sup>, Hyun Seob Cho<sup>1</sup>, Dohwan Byun<sup>1</sup>, Ian R. Henderson<sup>2</sup>, Gregory P. Copenhaver<sup>3</sup>, Ildoo Hwang<sup>1</sup> and Kyuha Choi<sup>1</sup>.
 
 
 1. Department of Life Sciences, Pohang University of Science and Technology, Pohang, Gyeongbuk, Republic of Korea
@@ -41,7 +41,7 @@ You should install CUDA-enabled GPU cards with at least 12GB GPU memory manufact
 ### Prepare folder structures
 1. Put fluorescent images into folders.
     - The parent folder name determines how DeepTetrad recognizes the name of samples. For instance, the parent folder name of I3bc (1) represents the sample name of fluorescent images.
-    - The folder name will be matched against the names in the physical T-DNA locations when determining Tetrad types. For example, "I3bc" will be matched with "Cyan-Yellow-Red", which is the order of the protein colors of the I3bc Fluorescent Tagged Transgenic Line(FTL).
+    - The grand-parent folder name will be matched against the names in the physical T-DNA locations when determining Tetrad types. For example, "I3bc" in the figure, will be matched with "Cyan-Yellow-Red", which is the order of the protein colors of the I3bc Fluorescent Tagged Transgenic Line(FTL).
 
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/folder_structure.jpg"></p>
 
@@ -78,6 +78,7 @@ I5ab	RGC
 ```
 4. Run DeepTetrad
 ```
+	conda activate pac
 	deeptetrad --physical_loc=T_DNA.txt --path=./test
 ```
 **NOTE**: you must activate the conda enviroment before running deeptetrad if you opened a **new console**.
