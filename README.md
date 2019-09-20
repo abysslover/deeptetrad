@@ -12,7 +12,7 @@ Eun-Cheon Lim<sup>1</sup>, Jaeil Kim<sup>1</sup>, Jihye Park<sup>1</sup>, Eun-Ju
 2. Department of Plant Sciences, University of Cambridge, Cambridge CB2 3EA, UK
 3. Department of Biology and the Integrative Program for Biological and Genome Sciences, University of North Carolina at Chapel Hill, Chapel Hill, North Carolina, USA
 
-- The manuscript is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/677351v1.full)
+- The manuscript is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/677351v1.full) and [TPJ](https://doi.org/10.1111/tpj.14543)
 
 ## Getting Started
 A step-by-step tutorial is provided in the following sections.
