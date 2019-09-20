@@ -40,6 +40,7 @@ def collect_a_path(root_path, verbose=None):
     return result_dict
 
 def get_all_prefixes(root_path):
+    root_path = os.path.abspath(root_path)
     prefix_pattern = '{}/**/*.jpg'.format(root_path)
     prefixes = set()
     for a_path in glob.iglob(prefix_pattern, recursive=True):
