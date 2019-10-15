@@ -84,13 +84,12 @@ I5ab	RGC
 5. Update DeepTetrad
 ```
 	conda activate pac
-	conda remove deeptetrad
-	conda install -c abysslover deeptetrad
+	conda update -c abysslover deeptetrad
 ```
 **NOTE**:
 1. You must activate the conda enviroment before running deeptetrad if you opened a **new console**.
-2. The model weights are not updated by *conda update* command, hence you should follow the manual update method as mentioned above.
+2. The model weights are not updated by *conda update* command, hence you must specify *-r* option in the first run after the update for refreshing the model weights.
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
 
 ### Contact
-Please contact abysslover@gmail.com (or euncheonlim@postech.ac.kr) and kyuha@postech.ac.kr if you have any questions about DeepTetrad.
+Please contact abysslover@gmail.com and kyuha@postech.ac.kr if you have any questions about DeepTetrad.
