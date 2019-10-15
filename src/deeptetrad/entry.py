@@ -10,7 +10,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 POLLEN_IMAGE_SINGLE_SIDE_SIZE = 256
 TETRAD_IMAGE_SINGLE_SIDE_SIZE = 256
-
+RESET_WEIGHTS = False
 import tensorflow as tf
 tf.logging.set_verbosity(tf.logging.ERROR) 
 import warnings
@@ -3708,6 +3708,13 @@ def detect_valid_tetrads(a_prefix, root_path):
     path_dict = get_path_dict(a_prefix)
     collect_all_valid_tetrads(path_dict, root_path)
 
+def reset_weights():
+    cur_parent = os.path.split(__file__)[0]
+    weights_path = '{}{}'.format(cur_parent, '/pollen/single_pollen_weights.h5')
+    download_weight_file(weights_path)
+    weights_path = '{}{}'.format(cur_parent, '/pollen/tetrad_weights.h5')
+    download_weight_file(weights_path)
+
 def load_pollen_prediction_model():
     config = PollenInferenceConfig()
     logs_dir = './pollen/logs/'
@@ -3719,6 +3726,7 @@ def load_pollen_prediction_model():
         download_weight_file(weights_path)
     model.load_weights(weights_path, by_name=True)
     return model
+
 
 def load_tetrad_prediction_model():
     config = TetradInferenceConfig()
@@ -3903,7 +3911,12 @@ def main():
                         metavar="path to fluorescent images",
                         help='Images to run DeepTetrad')
     
+    parser.add_argument('-r', '--reset_weights', action='store_true', required=False,
+                        help='Refresh weight files')
+    
     args = parser.parse_args()
+    if args.reset_weights:
+        reset_weights()
     root_path = args.path
     if None is args.physical_loc:
         physical_channels = {'I1bc': 'GRC', 'I1fg': 'GCR', 'I2ab': 'CGR', 'I2fg': 'RGC', 'I3bc': 'CGR', 'I5ab': 'RGC', 'CEN3': 'RG'}
