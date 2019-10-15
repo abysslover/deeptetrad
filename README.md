@@ -89,7 +89,7 @@ I5ab	RGC
 ```
 **NOTE**:
 1. You must activate the conda enviroment before running deeptetrad if you opened a **new console**.
-2. The model weights are not updated by *conda update* command, hence you must specify *-r* option in the first run after the update for refreshing the model weights.
+2. The model weights are not updated by *conda update* command, hence you must specify **-r** option in the first run after the update for refreshing the model weights.
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
 
 ### Contact
