@@ -2,7 +2,7 @@
 DeepTetrad: high-throughput image analysis of meiotic tetrads by deep learning in *Arabidopsis thaliana*
 
 ### Contributions
-- The project was initiated by Prof. Choi and the code is written by Dr. Lim (abysslover) at Pohang University of Science and Technology (POSTECH) Plant Genomic Recombination ([PGR](https://hae02032008.wixsite.com/kyuha)) Laboratory.
+- The project was initiated by Prof. Choi and the code is written by Dr. Lim (abysslover) at Pohang University of Science and Technology (POSTECH) Plant Genomic Recombination ([PGR](https://pgr.postech.ac.kr)) Laboratory.
     
 - This research was conducted in collaborations with the following people:
 Eun-Cheon Lim<sup>1</sup>, Jaeil Kim<sup>1</sup>, Jihye Park<sup>1</sup>, Eun-Jung Kim<sup>1</sup>, Juhyun Kim<sup>1</sup>, Yeong Mi Park<sup>1</sup>, Hyun Seob Cho<sup>1</sup>, Dohwan Byun<sup>1</sup>, Ian R. Henderson<sup>2</sup>, Gregory P. Copenhaver<sup>3</sup>, Ildoo Hwang<sup>1</sup> and Kyuha Choi<sup>1</sup>.
@@ -93,4 +93,4 @@ I5ab	RGC
 <p align="center"><img width="460" height="300" src="https://github.com/abysslover/deeptetrad/raw/master/assets/run_deeptetrad.jpg"></p>
 
 ### Contact
-Please contact abysslover@gmail.com and kyuha@postech.ac.kr if you have any questions about DeepTetrad.
+Please contact abysslover@gmail.com (or euncheonlim@postech.ac.kr) and kyuha@postech.ac.kr if you have any questions about DeepTetrad.
