@@ -1,3 +1,7 @@
+## [1.0.1.3] - 2019-10-15
+### Changed
+- The weight files are moved to postech server from github
+
 ## [1.0.1.0] - 2019-09-20
 ### Changed
 - The backbone of the pollen model is changed to resnet101

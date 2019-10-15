@@ -24,6 +24,9 @@ from scipy.spatial.kdtree import KDTree
 from deeptetrad.utils import *
 from deeptetrad.utils.file_utils import *
 from deeptetrad.utils.image_utils import *
+# from utils import *
+# from utils.file_utils import *
+# from utils.image_utils import *
 from joblib import Parallel, delayed
 import matplotlib
 matplotlib.use('Agg')
@@ -100,8 +103,6 @@ class PollenConfig(Config):
     
     # Image mean (RGB)
     MEAN_PIXEL = np.array([39.694053141276044, 39.332364298502604, 28.645670166015623])
-#     MEAN_PIXEL = np.array([35.694053141276044, 35.332364298502604, 24.645670166015623])
-#     MEAN_PIXEL = np.array([31.448479715983073, 31.64795110066732, 20.64955123901367])
 
     # ROIs kept after non-maximum supression (training and inference)
     POST_NMS_ROIS_TRAINING = 8000
@@ -120,7 +121,7 @@ class PollenConfig(Config):
     LEARNING_RATE = 0.01
 
 class TetradConfig(Config):
-    """Configuration for training on the toy dataset.
+    """Configuration for training on the tetrad dataset.
     Derives from the base Config class and overrides some values.
     """
     # Give the configuration a recognizable name
@@ -3706,11 +3707,6 @@ def detect_valid_tetrads(a_prefix, root_path):
 #     print('[detect_valid_tetrads] {}'.format(a_prefix))
     path_dict = get_path_dict(a_prefix)
     collect_all_valid_tetrads(path_dict, root_path)
-    
-def determine_tetrad_types(a_prefix, root_path, intensity_thr):
-#     print('[determine_tetrad_types] {}'.format(a_prefix))
-    path_dict = get_path_dict(a_prefix)
-    return (a_prefix, collect_all_tetrad_types(a_prefix, path_dict, root_path, intensity_thr, True))
 
 def load_pollen_prediction_model():
     config = PollenInferenceConfig()
@@ -3737,8 +3733,8 @@ def load_tetrad_prediction_model():
     return model
 
 def download_weight_file(a_local_path):
-    TETRAD_MODEL_URL = 'https://github.com/abysslover/deeptetrad/raw/master/src/deeptetrad/pollen/tetrad_weights.h5'
-    POLLEN_MODEL_URL = 'https://github.com/abysslover/deeptetrad/raw/master/src/deeptetrad/pollen/single_pollen_weights.h5'
+    TETRAD_MODEL_URL = 'ftp://141.223.132.214/deeptetrad/tetrad_weights.h5'
+    POLLEN_MODEL_URL = 'ftp://141.223.132.214/deeptetrad/single_pollen_weights.h5'
     if 'tetrad_weights' in a_local_path:
         target_model_URL = TETRAD_MODEL_URL
         print('[download_weight_file] start downloading tetrad weights')
@@ -3790,35 +3786,6 @@ def validate_tetrad_type_in_a_single_pass_two(a_prefix, root_path, intensity_thr
         is_count_visualize = visualize_dict['count']
         
     return (a_prefix, validate_all_tetrad_types_two(a_prefix, path_dict, root_path, intensity_thr, debug_set, desired_min_area_ratio, is_count_purge, is_count_capture, is_count_visualize))
-
-def determine_tetrad_type_in_a_single_pass_two_enlarge(a_prefix, root_path, intensity_thr, purge_dict, capture_dict, visualize_dict, debug_set, desired_min_area_ratio):
-    path_dict = get_path_dict_two(a_prefix)
-    is_merge_purge = False
-    if 'merge' in purge_dict:
-        is_merge_purge = purge_dict['merge']
-        
-    is_merge_capture = False
-    if 'merge' in capture_dict:
-        is_merge_capture = capture_dict['merge']
-    
-    is_merge_visualize = False
-    if 'merge' in visualize_dict:
-        is_merge_visualize = visualize_dict['merge']
-        
-    collect_all_valid_tetrads(a_prefix, root_path, debug_set, is_merge_purge, is_merge_capture, is_merge_visualize)
-    is_count_purge = False
-    if 'count' in purge_dict:
-        is_count_purge = purge_dict['count']
-    
-    is_count_capture = False
-    if 'count' in capture_dict:
-        is_count_capture = capture_dict['count']
-        
-    is_count_visualize = False
-    if 'count' in visualize_dict:
-        is_count_visualize = visualize_dict['count']
-        
-    return (a_prefix, collect_all_tetrad_types_two_enlarge(a_prefix, path_dict, root_path, intensity_thr, debug_set, desired_min_area_ratio, is_count_purge, is_count_capture, is_count_visualize))
 
 def determine_tetrad_type_in_a_single_pass_two(a_prefix, root_path, intensity_thr, purge_dict, capture_dict, visualize_dict, debug_set, desired_min_area_ratio):
     path_dict = get_path_dict_two(a_prefix)
