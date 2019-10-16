@@ -3741,8 +3741,9 @@ def load_tetrad_prediction_model():
     return model
 
 def download_weight_file(a_local_path):
-    TETRAD_MODEL_URL = 'ftp://141.223.132.214/deeptetrad/tetrad_weights.h5'
-    POLLEN_MODEL_URL = 'ftp://141.223.132.214/deeptetrad/single_pollen_weights.h5'
+    HOST_PREFIX = "ftp://141.223.132.214/deeptetrad"
+    TETRAD_MODEL_URL = "{}/tetrad_weights.h5".format(HOST_PREFIX)
+    POLLEN_MODEL_URL = "{}/single_pollen_weights.h5".format(HOST_PREFIX)
     if 'tetrad_weights' in a_local_path:
         target_model_URL = TETRAD_MODEL_URL
         print('[download_weight_file] start downloading tetrad weights')
@@ -3903,31 +3904,34 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(
         description='Run DeepTetrad')
-    parser.add_argument('--physical_loc', required=False,
+    parser.add_argument("-l", "--physical_loc", required=False,
                         default=None,
                         metavar="/path/to/physical_loc.txt",
-                        help='Directory of the physical locations')
-    parser.add_argument('--path', required=True,
+                        help="Directory of the physical locations")
+    parser.add_argument("-p", "--path", required=False,
+                        default=".",
                         metavar="path to fluorescent images",
-                        help='Images to run DeepTetrad')
+                        help="Images to run DeepTetrad (default: .)")
     
-    parser.add_argument('-r', '--reset_weights', action='store_true', required=False,
-                        help='Refresh weight files')
+    parser.add_argument("-r", "--reset_weights", action='store_true', required=False,
+                        help="Refresh weight files")
     
     args = parser.parse_args()
+    
     if args.reset_weights:
         reset_weights()
-    root_path = args.path
-    if None is args.physical_loc:
-        physical_channels = {'I1bc': 'GRC', 'I1fg': 'GCR', 'I2ab': 'CGR', 'I2fg': 'RGC', 'I3bc': 'CGR', 'I5ab': 'RGC', 'CEN3': 'RG'}
     else:
-        physical_channels = load_physical_locations(args.physical_loc)
-    desired_min_area_ratio = 4
-    purge_dict = {'align': False, 'pollen': False, 'tetrad': False, 'merge': False, 'count': False}
-    capture_dict = {'merge': False, 'count': False}
-    visualize_dict = {'merge': False, 'count': False}
-    debug_set = set()
-    run_tetrad_count_all_process(root_path, physical_channels, purge_dict, capture_dict, visualize_dict, debug_set, desired_min_area_ratio)
+        root_path = args.path
+        if None is args.physical_loc:
+            physical_channels = {'I1bc': 'GRC', 'I1fg': 'GCR', 'I2ab': 'CGR', 'I2fg': 'RGC', 'I3bc': 'CGR', 'I5ab': 'RGC', 'CEN3': 'RG'}
+        else:
+            physical_channels = load_physical_locations(args.physical_loc)
+        desired_min_area_ratio = 4
+        purge_dict = {'align': False, 'pollen': False, 'tetrad': False, 'merge': False, 'count': False}
+        capture_dict = {'merge': False, 'count': False}
+        visualize_dict = {'merge': False, 'count': False}
+        debug_set = set()
+        run_tetrad_count_all_process(root_path, physical_channels, purge_dict, capture_dict, visualize_dict, debug_set, desired_min_area_ratio)
     
 if __name__ == "__main__":
     main()
