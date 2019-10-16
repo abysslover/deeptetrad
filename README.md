@@ -71,24 +71,23 @@ I5ab	RGC
 ```
 	conda create -n pac
 ```
-3. Install DeepTetrad
-   - in Linux
+3. Install DeepTetrad in Linux
 ```
 	conda activate pac
 	conda install -c abysslover deeptetrad
 ```
-   - in Window
+4. Install DeepTetrad in Window
 ```
 	conda activate pac
 	conda install -c abysslover deeptetrad
 	pip install deeptetrad
 ```
-4. Run DeepTetrad
+5. Run DeepTetrad
 ```
 	conda activate pac
 	deeptetrad --physical_loc=T_DNA.txt --path=./test
 ```
-5. Update DeepTetrad
+6. Update DeepTetrad
 ```
 	conda activate pac
 	conda update -c abysslover deeptetrad
