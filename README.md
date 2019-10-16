@@ -72,12 +72,12 @@ I5ab	RGC
 	conda create -n pac
 ```
 3. Install DeepTetrad
-in Linux
+   - in Linux
 ```
 	conda activate pac
 	conda install -c abysslover deeptetrad
 ```
-in Window
+   - in Window
 ```
 	conda activate pac
 	conda install -c abysslover deeptetrad
