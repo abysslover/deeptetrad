@@ -80,12 +80,12 @@ I5ab	RGC
 ```
 	conda activate pac
 	deeptetrad --physical_loc=T_DNA.txt --path=./test
-	deeptetrad -r --physical_loc=T_DNA.txt --path=./test (if you need to update the model weights)
 ```
 5. Update DeepTetrad
 ```
 	conda activate pac
 	conda update -c abysslover deeptetrad
+	deeptetrad -r
 ```
 **NOTE**:
 1. You must activate the conda enviroment before running deeptetrad if you opened a **new console**.
