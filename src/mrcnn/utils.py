@@ -5,6 +5,7 @@ Common utility functions and classes.
 Copyright (c) 2017 Matterport, Inc.
 Licensed under the MIT License (see LICENSE for details)
 Written by Waleed Abdulla
+Modified by Eun-Cheon Lim @ POSTECH PGR Lab. since Jan. 16, 2019 
 """
 
 import sys
@@ -21,6 +22,7 @@ import urllib.request
 import shutil
 import warnings
 from distutils.version import LooseVersion
+from joblib import Parallel, delayed
 
 # URL from which to download the latest COCO trained weights
 COCO_MODEL_URL = "https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5"
@@ -55,6 +57,46 @@ def extract_bboxes(mask):
         boxes[i] = np.array([y1, x1, y2, x2])
     return boxes.astype(np.int32)
 
+def get_single_bbox(m):
+    # Bounding box.
+    horizontal_indicies = np.where(np.any(m, axis=0))[0]
+    vertical_indicies = np.where(np.any(m, axis=1))[0]
+    if horizontal_indicies.shape[0]:
+        x1, x2 = horizontal_indicies[[0, -1]]
+        y1, y2 = vertical_indicies[[0, -1]]
+        # x2 and y2 should not be part of the box. Increment by 1.
+        x2 += 1
+        y2 += 1
+    else:
+        # No mask for this instance. Might happen due to
+        # resizing or cropping. Set bbox to zeros
+        x1, x2, y1, y2 = 0, 0, 0, 0
+    return np.array([y1, x1, y2, x2])
+def extract_bboxes_parallel(mask):
+    """Compute bounding boxes from masks.
+    mask: [height, width, num_instances]. Mask pixels are either 1 or 0.
+
+    Returns: bbox array [num_instances, (y1, x1, y2, x2)].
+    """
+    boxes = np.zeros([mask.shape[-1], 4], dtype=np.int32)
+    local_boxes = Parallel(n_jobs=-1, backend="threading")(delayed(get_single_bbox)(mask[:, :, i]) for i in range(mask.shape[-1]))
+    return np.array(local_boxes, dtype=np.int32)
+#         m = mask[:, :, i]
+#         # Bounding box.
+#         horizontal_indicies = np.where(np.any(m, axis=0))[0]
+#         vertical_indicies = np.where(np.any(m, axis=1))[0]
+#         if horizontal_indicies.shape[0]:
+#             x1, x2 = horizontal_indicies[[0, -1]]
+#             y1, y2 = vertical_indicies[[0, -1]]
+#             # x2 and y2 should not be part of the box. Increment by 1.
+#             x2 += 1
+#             y2 += 1
+#         else:
+#             # No mask for this instance. Might happen due to
+#             # resizing or cropping. Set bbox to zeros
+#             x1, x2, y1, y2 = 0, 0, 0, 0
+#         boxes[i] = np.array([y1, x1, y2, x2])
+#     return boxes.astype(np.int32)
 
 def compute_iou(box, boxes, box_area, boxes_area):
     """Calculates IoU of the given box with the array of the given boxes.
@@ -329,6 +371,7 @@ class Dataset(object):
                 # Include BG class in all datasets
                 if i == 0 or source == info['source']:
                     self.source_class_ids[source].append(i)
+        
         print('[utils.prepare] sources : {}, source_class_ids: {}'.format(self.sources, self.source_class_ids))
 
     def map_source_class_id(self, source_class_id):
@@ -426,7 +469,7 @@ def resize_image(image, min_dim=None, max_dim=None, min_scale=None, mode="square
     h, w = image.shape[:2]
     window = (0, 0, h, w)
     scale = 1
-    padding = [(0, 0), (0, 0), (0, 0)]
+    padding = [(0, 0), (0, 0)]
     crop = None
 
     if mode == "none":
@@ -497,7 +540,7 @@ def resize_image(image, min_dim=None, max_dim=None, min_scale=None, mode="square
     return image.astype(image_dtype), window, scale, padding, crop
 
 
-def resize_mask(mask, scale, padding, crop=None):
+def resize_mask(mask, scale, padding, crop=None, mode=None):
     """Resizes a mask using the given scale and padding.
     Typically, you get the scale and padding from resize_image() to
     ensure both, the image and the mask, are resized consistently.
@@ -506,6 +549,8 @@ def resize_mask(mask, scale, padding, crop=None):
     padding: Padding to add to the mask in the form
             [(top, bottom), (left, right), (0, 0)]
     """
+    if 'none' is mode:
+        return mask
     # Suppress warning from scipy 0.13.0, the output shape of zoom() is
     # calculated with round() instead of int()
     with warnings.catch_warnings():
@@ -515,11 +560,18 @@ def resize_mask(mask, scale, padding, crop=None):
             mask = scipy.ndimage.zoom(mask, zoom=[scale, scale, 1], order=0)
     if crop is not None:
 #         print('[resize_mask] crop: {}, mask: {}'.format(crop, mask.shape))
+#         print('[resize_mask] crop: {}, {}'.format(crop, mask.shape))
         y, x, h, w = crop
         mask = mask[y:y + h, x:x + w]
 #         print('[resize_mask] cropped: {}, mask: {}'.format(crop, mask.shape))
     else:
 #         print('[resize_mask] pad')
+        np_padding = np.array(padding)
+        # the number of dimensions of a mask is always 2  
+        if 3 == np_padding.shape[0]:
+            padding.pop()
+#         print('[resize_mask] mask: {}, pad: {}, pad.shape: {}'.format(mask.shape, padding, np_padding.shape))
+        
         mask = np.pad(mask, padding, mode='constant', constant_values=0)
     return mask
 
