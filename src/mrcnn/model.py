@@ -5,8 +5,7 @@ The main Mask R-CNN model implementation.
 Copyright (c) 2017 Matterport, Inc.
 Licensed under the MIT License (see LICENSE for details)
 Written by Waleed Abdulla
-
-Modified by Eun-Cheon Lim @ POSTECH PGR Lab. since 2019. 1. 16
+Modified by Eun-Cheon Lim @ POSTECH PGR Lab. since Jan. 16, 2019
 """
 
 import os
