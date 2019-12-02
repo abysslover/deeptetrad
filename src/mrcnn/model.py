@@ -26,6 +26,7 @@ import keras.models as KM
 
 from mrcnn import utils
 import imgaug
+from imgaug import augmenters as iaa
 
 # Requires TensorFlow 1.3+ and Keras 2.0.8+.
 from distutils.version import LooseVersion
@@ -1186,6 +1187,17 @@ def mrcnn_mask_loss_graph(target_masks, target_class_ids, pred_masks):
 #  Data Generator
 ############################################################
 
+def get_decomposed_mask(mask, n_masks=None):
+    if None is n_masks:
+        n_masks = np.max(mask)
+    new_mask = np.zeros([mask.shape[0], mask.shape[1], n_masks], dtype=np.uint8)
+    for i in range(1, n_masks + 1):
+        I, J = np.nonzero(i == mask)
+        if 0 == I.shape[0]:
+            continue
+        new_mask[I, J, i-1] = 1
+    return new_mask
+
 def load_image_gt(dataset, config, image_id, augment=False, augmentation=None,
                   use_mini_mask=False):
     """Load and return ground truth data for an image (image, mask, bounding boxes).
@@ -1215,6 +1227,8 @@ def load_image_gt(dataset, config, image_id, augment=False, augmentation=None,
     image = dataset.load_image(image_id)
 #     print('[load_image_gt] load mask')
     mask, class_ids = dataset.load_mask(image_id)
+    
+    
     original_shape = image.shape
 #     print('[load_image_gt] resize image')
     image, window, scale, padding, crop = utils.resize_image(
@@ -1224,54 +1238,87 @@ def load_image_gt(dataset, config, image_id, augment=False, augmentation=None,
         max_dim=config.IMAGE_MAX_DIM,
         mode=config.IMAGE_RESIZE_MODE)
 #     print('[load_image_gt] resize mask')
-    mask = utils.resize_mask(mask, scale, padding, crop)
-
-    # Random horizontal flips.
-    # TODO: will be removed in a future update in favor of augmentation
-    if augment:
-        logging.warning("'augment' is deprecated. Use 'augmentation' instead.")
-        if random.randint(0, 1):
-            image = np.fliplr(image)
-            mask = np.fliplr(mask)
-
-    # Augmentation
-    # This requires the imgaug lib (https://github.com/aleju/imgaug)
-    if augmentation:
-#         print('[load_image_gt] enter augmentation')
-
-        # Augmenters that are safe to apply to masks
-        # Some, such as Affine, have settings that make them unsafe, so always
-        # test your augmentation on masks
-        MASK_AUGMENTERS = ["Sequential", "SomeOf", "OneOf", "Sometimes",
-                           "Fliplr", "Flipud", "CropAndPad",
-                           "Affine", "PiecewiseAffine"]
-
-        def hook(images, augmenter, parents, default):
-            """Determines which augmenters to apply to masks."""
-            return augmenter.__class__.__name__ in MASK_AUGMENTERS
-
-        # Store shapes before augmentation to compare
-        image_shape = image.shape
-        mask_shape = mask.shape
-        # Make augmenters deterministic to apply similarly to images and masks
-        det = augmentation.to_deterministic()
-        image = det.augment_image(image)
-        # Change mask to np.uint8 because imgaug doesn't support np.bool
-        mask = det.augment_image(mask.astype(np.uint8),
-                                 hooks=imgaug.HooksImages(activator=hook))
-        # Verify that shapes didn't change
-        assert image.shape == image_shape, "Augmentation shouldn't change image size"
-        assert mask.shape == mask_shape, "Augmentation shouldn't change mask size"
-        # Change mask back to bool
-        mask = mask.astype(np.bool)
-
-    # Note that some boxes might be all zeros if the corresponding mask got cropped out.
-    # and here is to filter them out
+    mask = utils.resize_mask(mask, scale, padding, crop, config.IMAGE_RESIZE_MODE)
+    
+    mask = get_decomposed_mask(mask, class_ids.shape[-1])
     _idx = np.sum(mask, axis=(0, 1)) > 0
 #     print('[load_image_gt] idx: {}'.format(_idx))
     mask = mask[:, :, _idx]
 #     print('[load_image_gt] {}'.format(mask))
     class_ids = class_ids[_idx]
+    
+    # Random horizontal flips.
+    # TODO: will be removed in a future update in favor of augmentation
+    if class_ids.shape[-1] > 0:
+        if augment:
+            logging.warning("'augment' is deprecated. Use 'augmentation' instead.")
+            if random.randint(0, 1):
+                image = np.fliplr(image)
+                mask = np.fliplr(mask)
+    
+    #     rand_deg = np.random.randint(0, 360)
+        
+    #     if rand_deg not in dataset.aug_dict[image_id]:
+    #         
+    #         selected_aug = iaa.Affine(rotate=rand_deg)
+    #         det = selected_aug.to_deterministic()
+    #         image = det.augment_image(image)
+    #         # Change mask to np.uint8 because imgaug doesn't support np.bool
+    #         mask = det.augment_image(mask.astype(np.uint8),
+    #                                  hooks=imgaug.HooksImages(activator=hook))
+    #         assert image.shape == image_shape, "Augmentation shouldn't change image size"
+    #         assert mask.shape == mask_shape, "Augmentation shouldn't change mask size"
+    #         # Change mask back to bool
+    #         mask = mask.astype(np.bool)
+    #         dataset.aug_dict[image_id][rand_deg] = image, mask
+    #     image, mask = dataset.aug_dict[image_id][rand_deg]
+        
+        # Augmentation
+        # This requires the imgaug lib (https://github.com/aleju/imgaug)
+        if augmentation:
+    #         print('[load_image_gt] enter augmentation mask: {}'.format(mask.shape))
+    
+            # Augmenters that are safe to apply to masks
+            # Some, such as Affine, have settings that make them unsafe, so always
+            # test your augmentation on masks
+            MASK_AUGMENTERS = ["Sequential", "SomeOf", "OneOf", "Sometimes",
+                               "Fliplr", "Flipud", "CropAndPad",
+                               "Affine", "PiecewiseAffine"]
+    
+            def hook(images, augmenter, parents, default):
+                """Determines which augmenters to apply to masks."""
+                return augmenter.__class__.__name__ in MASK_AUGMENTERS
+            
+            # Store shapes before augmentation to compare
+            image_shape = image.shape
+            mask_shape = mask.shape
+            # Make augmenters deterministic to apply similarly to images and masks
+            det = augmentation.to_deterministic()
+            image = det.augment_image(image)
+            # Change mask to np.uint8 because imgaug doesn't support np.bool
+            mask = det.augment_image(mask,
+                                     hooks=imgaug.HooksImages(activator=hook))
+    #         mask = det.augment_image(mask.astype(np.uint8),
+    #                                  hooks=imgaug.HooksImages(activator=hook))
+            # Verify that shapes didn't change
+            assert image.shape == image_shape, "Augmentation shouldn't change image size"
+            assert mask.shape == mask_shape, "Augmentation shouldn't change mask size"
+        # Change mask back to bool
+#         mask = mask.astype(np.bool)
+#         print('[model.load_image_gt] exit augmentation mask: {}'.format(mask.shape))
+
+    _idx = np.sum(mask, axis=(0, 1)) > 0
+#     print('[load_image_gt] idx: {}'.format(_idx))
+    mask = mask[:, :, _idx]
+#     print('[load_image_gt] {}'.format(mask))
+    class_ids = class_ids[_idx]
+
+#     mask = get_decomposed_mask(mask, class_ids.shape[-1])
+    
+#     print('[model.load_image_gt] mask {}'.format(mask.shape))
+    # Note that some boxes might be all zeros if the corresponding mask got cropped out.
+    # and here is to filter them out
+    
     # Bounding boxes. Note that some boxes might be all zeros
     # if the corresponding mask got cropped out.
     # bbox: [num_instances, (y1, x1, y2, x2)]
@@ -1293,7 +1340,7 @@ def load_image_gt(dataset, config, image_id, augment=False, augmentation=None,
     # Resize masks to smaller size to reduce memory usage
     if use_mini_mask:
         mask = utils.minimize_mask(bbox, mask, config.MINI_MASK_SHAPE)
-
+    mask = mask.astype(np.bool)
     # Image meta data
 #     print('[load_image_gt] compose image meta')
     image_meta = compose_image_meta(image_id, original_shape, image.shape,
@@ -1327,6 +1374,8 @@ def build_detection_targets(rpn_rois, gt_class_ids, gt_boxes, gt_masks, config):
         gt_class_ids.dtype)
     assert gt_boxes.dtype == np.int32, "Expected int but got {}".format(
         gt_boxes.dtype)
+    if gt_masks.dtype != np.bool_:
+        gt_masks = gt_masks.astype(np.bool_)
     assert gt_masks.dtype == np.bool_, "Expected bool but got {}".format(
         gt_masks.dtype)
 
@@ -2092,7 +2141,7 @@ class MaskRCNN():
 
         return model
 
-    def find_last(self):
+    def find_last(self, dir_key=None, pattern=None):
         """Finds the last checkpoint file of the last trained model in the
         model directory.
         Returns:
@@ -2102,6 +2151,8 @@ class MaskRCNN():
         dir_names = next(os.walk(self.model_dir))[1]
         
         key = self.config.NAME.lower()
+        if None is not dir_key:
+            key = dir_key
         
         dir_names = filter(lambda f: f.startswith(key), dir_names)
         dir_names = sorted(dir_names)
@@ -2115,6 +2166,9 @@ class MaskRCNN():
         # Find the last checkpoint
         checkpoints = next(os.walk(dir_name))[2]
         checkpoints = filter(lambda f: f.startswith("mask_rcnn"), checkpoints)
+        if None is not pattern:
+            checkpoints = filter(lambda f: pattern in f, checkpoints)
+            
         checkpoints = sorted(checkpoints)
         if not checkpoints:
             import errno
@@ -2200,6 +2254,7 @@ class MaskRCNN():
             layer = self.keras_model.get_layer(name)
             if layer.output in self.keras_model.losses:
                 continue
+            
             loss = (
                 tf.reduce_mean(layer.output, keepdims=True)
                 * self.config.LOSS_WEIGHTS.get(name, 1.))
@@ -2211,6 +2266,7 @@ class MaskRCNN():
             keras.regularizers.l2(self.config.WEIGHT_DECAY)(w) / tf.cast(tf.size(w), tf.float32)
             for w in self.keras_model.trainable_weights
             if 'gamma' not in w.name and 'beta' not in w.name]
+        
         self.keras_model.add_loss(tf.add_n(reg_losses))
 
         # Compile
