@@ -3666,8 +3666,8 @@ def detect_tetrads_from_all_two_channel_samples(valid_prefixes, root_path, physi
             per_sample_grouped_result[individual_name] = per_sample_grouped_result[individual_name] + Counter(result)
             per_line_grouped_result[rep_line_name] = per_line_grouped_result[rep_line_name] + Counter(result)
             rg_interval, rg_interval_dm, result_dm, n_total, n_total_dm = calculate_intervals_from_dict_two(result)
-            out.write('{}\t{}\t{}\t{:.3f}\tDeepTetrad\n').format(rep_line_name, file_name, n_total, rg_interval)
-            out.write('{}\t{}\t{}\t{:.3f}\tDeepMonad\n').format(rep_line_name, file_name, n_total_dm, rg_interval_dm)
+            out.write('{}\t{}\t{}\t{:.3f}\tDeepTetrad\n'.format(rep_line_name, file_name, n_total, rg_interval))
+            out.write('{}\t{}\t{}\t{:.3f}\tDeepMonad\n'.format(rep_line_name, file_name, n_total_dm, rg_interval_dm))
     
     all_rf_output_path = '{}/DeepTetrad_individual_intervals_two_channels.csv'.format(root_path)
     per_sample_types_dt_output_path = '{}/DeepTetrad_individual_types_two_channels.deeptetrad.csv'.format(root_path)
